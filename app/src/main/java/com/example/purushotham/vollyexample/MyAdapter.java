@@ -48,8 +48,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
             public void onClick(View v) {
                 String options[]={"Match details","Player details"};
                 AlertDialog.Builder builder=new AlertDialog.Builder(context);
-                builder.setTitle("Choose your option")
-                        .setItems(options, new DialogInterface.OnClickListener()
+                builder.setItems(options, new DialogInterface.OnClickListener()
                         {
                             @Override
                             public void onClick(DialogInterface dialog, int which)
@@ -79,7 +78,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
                                 }
 
                             }
-                        }).show();
+                        });
+                builder.show();
 
 
             }

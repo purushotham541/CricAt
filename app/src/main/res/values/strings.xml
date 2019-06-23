@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">VollyExample</string>
+    <string name="app_name">CricAt</string>
+    <string name="choose">choose</string>
+
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
@@ -26,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:text="Team1"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:id="@+id/team1"
 
                 />
@@ -34,15 +35,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="X"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_marginLeft="5dp"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
+
+
                     />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Team2"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="16sp"
+
                 android:id="@+id/team2"
                 android:layout_marginLeft="5dp"
 
@@ -53,7 +58,8 @@
                 android:layout_height="wrap_content"
                 android:text="Match type"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="16sp"
+
                 android:id="@+id/m_type"
 
                 />
@@ -62,7 +68,8 @@
                 android:layout_height="wrap_content"
                 android:text="Match status"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="16sp"
+
                 android:id="@+id/m_status"
 
                 />
@@ -71,7 +78,8 @@
                 android:layout_height="wrap_content"
                 android:text="Date"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="16sp"
+
                 android:id="@+id/m_date"
 
                 />
