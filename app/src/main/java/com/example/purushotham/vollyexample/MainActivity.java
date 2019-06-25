@@ -1,12 +1,19 @@
 package com.example.purushotham.vollyexample;
 
 import android.app.ProgressDialog;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,11 +40,19 @@ public class MainActivity extends AppCompatActivity
     List<Model> match_list;
     MyAdapter myAdapter;
     RequestQueue requestQueue;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.inflateMenu(R.menu.mysearch);
+
+
+
+
 
         recyclerView=findViewById(R.id.rcv);
         recyclerView.setHasFixedSize(true);
@@ -101,7 +116,7 @@ public class MainActivity extends AppCompatActivity
                 }
 
 
-                MyAdapter myAdapter=new MyAdapter(match_list,MainActivity.this);
+                 myAdapter=new MyAdapter(match_list,MainActivity.this);
                 recyclerView.setAdapter(myAdapter);
 
 
@@ -119,5 +134,41 @@ public class MainActivity extends AppCompatActivity
         requestQueue=Volley.newRequestQueue(MainActivity.this);
         requestQueue.add(stringRequest);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+
+         super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.mysearch,menu);
+        MenuItem menuItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                myAdapter.getFilter().filter(s);
+                return true;
+            }
+        });
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+         super.onOptionsItemSelected(item);
+
+
+
+        return true;
     }
 }

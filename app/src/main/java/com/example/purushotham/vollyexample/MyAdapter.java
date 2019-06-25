@@ -10,18 +10,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements Filterable
 {
     private List<Model> match_list;
+    private List<Model> match_list_filter;
+
     Context context;
     public MyAdapter(List<Model> match_list, Context context) {
         this.match_list = match_list;
         this.context = context;
+        match_list_filter=new ArrayList<>(match_list);
     }
 
 
@@ -92,6 +98,49 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
         return match_list.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return mySearchFilter;
+    }
+    private Filter mySearchFilter=new Filter()
+    {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint)
+        {
+            List<Model> filtered_result=new ArrayList<>();
+            if(constraint==null||constraint.length()==0)
+            {
+                filtered_result.addAll(match_list);
+            }
+            else
+                {
+                  String searchelement= constraint.toString().toLowerCase().trim();
+
+                   for(Model model:match_list_filter)
+                   {
+                       if(model.getTeam1().toLowerCase().contains(searchelement))
+                       {
+                           filtered_result.add(model);
+                       }
+                   }
+
+               }
+               FilterResults filterResults=new FilterResults();
+                filterResults.values=filtered_result;
+                return filterResults;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results)
+        {
+            match_list.clear();
+            match_list.addAll((List)results.values);
+            notifyDataSetChanged();
+
+        }
+    };
+
     public class ViewHolder extends RecyclerView.ViewHolder
     {
         TextView team1,team2,match_type,match_status,date;
@@ -109,5 +158,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
 
         }
     }
+
 
 }

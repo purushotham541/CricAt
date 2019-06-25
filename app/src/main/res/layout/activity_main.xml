@@ -11,7 +11,10 @@
             android:layout_width="match_parent"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+
+
             app:title="@string/app_name"
+            android:id="@+id/cltlbr"
 
             app:contentScrim="@color/colorPrimaryDark"
             android:layout_height="wrap_content">
@@ -25,6 +28,10 @@
                 />
             <android.support.v7.widget.Toolbar
                 app:title="@string/app_name"
+                android:id="@+id/toolbar"
+                app:layout_collapseMode="pin"
+
+
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"/>
 
