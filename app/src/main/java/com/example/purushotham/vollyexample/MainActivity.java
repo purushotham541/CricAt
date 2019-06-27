@@ -27,9 +27,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import static android.widget.LinearLayout.HORIZONTAL;
 
@@ -93,7 +96,18 @@ public class MainActivity extends AppCompatActivity
                         String status=jsonArray.getJSONObject(i).getString("matchStarted");
                         String match_type=jsonArray.getJSONObject(i).getString("type");
                         String date=jsonArray.getJSONObject(i).getString("date");
+                        String dateTimeGMT=jsonArray.getJSONObject(i).getString("dateTimeGMT");
+
+                        DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                        fmt.setTimeZone(TimeZone.getTimeZone(dateTimeGMT));
+                        Date date1=fmt.parse(dateTimeGMT);
+                        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("hh:mm:ss");
+                        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+                        String c_date=simpleDateFormat.format(date1);
+
+
                         String id=jsonArray.getJSONObject(i).getString("unique_id");
+
                         if(status.equals("true"))
                         {
                             match_status="Started";
@@ -105,7 +119,7 @@ public class MainActivity extends AppCompatActivity
                         }
 
 
-                        Model model=new Model(id,team1,team2,date,match_status,match_type);
+                        Model model=new Model(id,team1,team2,c_date,match_status,match_type);
                         match_list.add(model);
 
                     }
@@ -113,10 +127,12 @@ public class MainActivity extends AppCompatActivity
                 } catch (JSONException e)
                 {
                     e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
 
 
-                 myAdapter=new MyAdapter(match_list,MainActivity.this);
+                myAdapter=new MyAdapter(match_list,MainActivity.this);
                 recyclerView.setAdapter(myAdapter);
 
 

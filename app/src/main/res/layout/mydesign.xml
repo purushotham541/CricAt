@@ -29,6 +29,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
                 android:id="@+id/team1"
+                android:maxLength="12"
 
                 />
                 <TextView
@@ -47,7 +48,7 @@
                 android:text="Team2"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
-
+                android:maxLength="12"
                 android:id="@+id/team2"
                 android:layout_marginLeft="5dp"
 
